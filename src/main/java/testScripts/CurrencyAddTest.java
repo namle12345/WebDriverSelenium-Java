@@ -16,27 +16,32 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 
 public class CurrencyAddTest {
 	// Create instance of WebDriver
 	DriverUtilities myDriverUtilities = new DriverUtilities();
 	WebDriver driver = myDriverUtilities.getDriver();
 
-	@Test
-	public void addCurrency() {
+	@Before
+	public void startUp() {
 		// Go to the target website
 		driver.get(DataFileTradingPlat.homePageURL);
-
-		// Enter login details and login
-		LoginPage.userNameField(driver).sendKeys(DataFileTradingPlat.userUserName);
-		LoginPage.passwordField(driver).sendKeys(DataFileTradingPlat.userPassword);
-		LoginPage.submitButton(driver).click();
-
+		
+		LoginTest.login(driver);
+		
 		// Navigate to Check Balance screen
 		HomePage.balanceLink(driver).click();
 
+		// Assert if correctly on Check Balance page
+		Assert.assertEquals(DataFileTradingPlat.checkBalanceURL, driver.getCurrentUrl());
+	}
+	
+	@Test
+	public void addCurrency() {
 		// Add new Currency Account
 		CheckBalancePage.addNewAccountLink(driver).click();
+		Assert.assertEquals(DataFileTradingPlat.addAccountURL, driver.getCurrentUrl());
 		WebElement currencyField = AddNewAccountPage.currencyDropDown(driver);
 		Select currencyFieldSelect = new Select(currencyField);
 		currencyFieldSelect.selectByVisibleText(DataFileTradingPlat.accountType);
@@ -56,9 +61,6 @@ public class CurrencyAddTest {
 		// Assert 50000 has been added
 		String actualAccountBalance = CheckBalancePage.USDBalanceCell(driver).getText();
 		Assert.assertEquals(DataFileTradingPlat.fundAmountLong, actualAccountBalance);
-
-		// Log off to ensure no cookies / cache login issue for other tests
-		HomePage.logoutLink(driver).click();
 	}
 
 	@After

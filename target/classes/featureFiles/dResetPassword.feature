@@ -26,5 +26,5 @@ Feature: Reset Password
     And a user enters in the customer's valid data on the Request Password Reset page
     And a user clicks on the Reset Password button on the Request Password Reset page
     Then confirm that the appropriate confirmation reset password message has appeared
-    And confirm that the user can login with their new password on the Login screen
-    And confirm the appropriate login confirmation message has appeared
+    When a user can login with their new password on the Login screen
+    Then confirm the appropriate login confirmation message has appeared

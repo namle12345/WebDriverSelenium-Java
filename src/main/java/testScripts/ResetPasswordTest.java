@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,8 @@ public class ResetPasswordTest {
 	DriverUtilities myDriverUtilities = new DriverUtilities();
 	WebDriver driver = myDriverUtilities.getDriver();
 
-	@Test
-	public void resetPassword() {
+	@Before
+	public void startUp() {
 		// Go to the target website
 		driver.get(DataFileTradingPlat.homePageURL);
 
@@ -31,7 +32,13 @@ public class ResetPasswordTest {
 
 		// Navigate to Reset Password page
 		LoginPage.resetPasswordLink(driver).click();
-
+		
+		// Assert if correctly on Reset Password page
+		Assert.assertEquals(DataFileTradingPlat.resetPasswordURL, driver.getCurrentUrl());
+	}
+	
+	@Test
+	public void resetPassword() {
 		// Enter in correct details
 		ResetPasswordPage.usernameField(driver).sendKeys(DataFileTradingPlat.userUserName);
 		WebElement questionField = ResetPasswordPage.questionDropDown(driver);
@@ -51,6 +58,9 @@ public class ResetPasswordTest {
 		String tmpPassword = splitPasswordLine[1];
 		ResetPasswordConfirmationPage.homeLink(driver).click();
 
+		// Assert if correctly navigated to homepage
+		Assert.assertEquals(DataFileTradingPlat.homePageURL, driver.getCurrentUrl()); 
+		
 		// Login with new password details
 		LoginPage.userNameField(driver).sendKeys(DataFileTradingPlat.userUserName);
 		LoginPage.passwordField(driver).sendKeys(tmpPassword);
@@ -59,10 +69,6 @@ public class ResetPasswordTest {
 		// Check correct message appears to confirm to login success
 		String actualLoginMessage = HomePage.loginMessage(driver).getText();
 		Assert.assertEquals(DataFileTradingPlat.loginMessage, actualLoginMessage);
-
-		// Log off to ensure no cookies / cache login issue for other tests
-		HomePage.logoutLink(driver).click();
-
 	}
 
 	@After

@@ -62,9 +62,6 @@ public class RegisterTest {
 		// Check correct message appears to confirm to login success
 		String actualLoginMessage = HomePage.loginMessage(driver).getText();
 		Assert.assertEquals(DataFileTradingPlat.loginMessage, actualLoginMessage);
-
-		// Log off to ensure no cookies / cache login issue for other tests
-		HomePage.logoutLink(driver).click();
 	}
 
 	@After

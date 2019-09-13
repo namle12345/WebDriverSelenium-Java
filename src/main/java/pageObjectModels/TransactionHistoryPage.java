@@ -17,5 +17,9 @@ public class TransactionHistoryPage {
 	public static WebElement numberOfSharesField(WebDriver driver) {
 		return driver.findElement(By.xpath("//*[contains(@id, 'transaction_history')]/tbody/tr/td[3]"));
 	}
+	
+	public static WebElement dateAndTimeField(WebDriver driver) {
+		return driver.findElement(By.xpath("//*[contains(@id, 'transaction_history')]/tbody/tr/td[7]"));
+	}
 
 }
