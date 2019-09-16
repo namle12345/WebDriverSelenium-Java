@@ -26,5 +26,8 @@ Feature: Register
     And a user enters unique "RT61@fdm.com" , "LontestRT61" and "Scam" in the relevant fields
     And a user clicks on the submit button on the Registration page
     Then confirm that an appropriate welcome message has appeared
-    And confirm that an appropriate user name message appears when logging in
+    When a user clicks on Login link
+    Then confirm that the user is correctly brought to the Login page
+    When a user enters in the newly created account information on the Login page
+    Then confirm that an appropriate user name message appears when logging in
 

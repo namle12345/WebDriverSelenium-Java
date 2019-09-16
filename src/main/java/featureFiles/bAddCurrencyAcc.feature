@@ -23,9 +23,11 @@ Feature: Check Balance
   Scenario: Create a new currency account and add funds into it
     Given a user is on the Check Balance screen of the Trading Platform
     When a user clicks on Add New Account link on the Check Balance page
-    And a user selects an appropriate currency type on the Add New Account page
+    Then confirm that the user is correctly brought to Add New Account page
+    When a user selects an appropriate currency type on the Add New Account page
     And a user clicks on the Add Account button on the Add New Account page
-    And a user clicks Add Funds on the newly made account row
+    Then confirm that the account created is the correct currency type
+    When a user clicks Add Funds on the newly made account row
     And a user enters the value they wish to deposit into the account
     And a user clicks the confirm button
     Then confirm that the appropriate account has the correct number of funds added to it

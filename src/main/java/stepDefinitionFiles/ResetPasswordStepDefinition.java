@@ -34,6 +34,11 @@ public class ResetPasswordStepDefinition {
 	public void a_user_clicks_on_the_Forgot_Password_link_on_the_Check_Balance_page() throws Throwable {
 		LoginPage.resetPasswordLink(driver).click();
 	}
+	
+	@Then("^confirm that the user is correctly brought to Reset Password page$")
+	public void confirm_that_the_user_is_correctly_brought_to_Reset_Password_page() throws Throwable {
+		Assert.assertEquals(DataFileTradingPlat.resetPasswordURL, driver.getCurrentUrl());
+	}
 
 	@When("^a user enters in the customer's valid data on the Request Password Reset page$")
 	public void a_user_enters_in_the_customer_s_valid_data_on_the_Request_Password_Reset_page() throws Throwable {
@@ -55,18 +60,27 @@ public class ResetPasswordStepDefinition {
 		Assert.assertEquals(DataFileTradingPlat.resetConfirmationMessage, actualResetMessage);
 	}
 
-	@Then("^confirm that the user can login with their new password on the Login screen$")
-	public void confirm_that_the_user_can_login_with_their_new_password_on_the_Login_screen() throws Throwable {
+	@When("^a user clicks on the Home link$")
+	public void a_user_clicks_on_the_Home_link() throws Throwable {
 		String newPasswordLine = ResetPasswordConfirmationPage.newPasswordField(driver).getText();
 		newPasswordLine = newPasswordLine.replaceAll("\\s+", "");
 		String[] splitPasswordLine = newPasswordLine.split(":", 2);
 		tmpPassword = splitPasswordLine[1];
 		ResetPasswordConfirmationPage.homeLink(driver).click();
+	}
+
+	@Then("^confirm that the user is correctly brought to Login page$")
+	public void confirm_that_the_user_is_correctly_brought_to_Login_page() throws Throwable {
+		Assert.assertEquals(DataFileTradingPlat.homePageURL, driver.getCurrentUrl()); 
+	}
+
+	@When("^a user enters in their login information with their new password on the Login screen$")
+	public void a_user_enters_in_their_login_information_with_their_new_password_on_the_Login_screen() throws Throwable {
 		LoginPage.userNameField(driver).sendKeys(DataFileTradingPlat.userUserName);
 		LoginPage.passwordField(driver).sendKeys(tmpPassword);
 		LoginPage.submitButton(driver).click();
 	}
-
+	
 	@Then("^confirm the appropriate login confirmation message has appeared$")
 	public void confirm_the_appropriate_login_confirmation_message_has_appeared() throws Throwable {
 		String actualLoginMessage = HomePage.loginMessage(driver).getText();

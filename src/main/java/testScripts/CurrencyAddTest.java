@@ -19,12 +19,14 @@ import org.junit.Assert;
 import org.junit.Before;
 
 public class CurrencyAddTest {
-	// Create instance of WebDriver
-	DriverUtilities myDriverUtilities = new DriverUtilities();
-	WebDriver driver = myDriverUtilities.getDriver();
+	WebDriver driver;
 
 	@Before
 	public void startUp() {
+		// Initialize driver
+		DriverUtilities myDriverUtilities = new DriverUtilities();
+		driver = myDriverUtilities.getDriver();
+		
 		// Go to the target website
 		driver.get(DataFileTradingPlat.homePageURL);
 		

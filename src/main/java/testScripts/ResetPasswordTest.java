@@ -18,12 +18,14 @@ import testData.DataFileTradingPlat;
 import utilities.DriverUtilities;
 
 public class ResetPasswordTest {
-	// Create instance of WebDriver
-	DriverUtilities myDriverUtilities = new DriverUtilities();
-	WebDriver driver = myDriverUtilities.getDriver();
+	WebDriver driver;
 
 	@Before
 	public void startUp() {
+		// Initialize driver
+		DriverUtilities myDriverUtilities = new DriverUtilities();
+		driver = myDriverUtilities.getDriver();
+		
 		// Go to the target website
 		driver.get(DataFileTradingPlat.homePageURL);
 

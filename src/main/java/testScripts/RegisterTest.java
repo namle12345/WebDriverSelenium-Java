@@ -15,12 +15,14 @@ import org.junit.After;
 import org.junit.Assert;
 
 public class RegisterTest {
-	// Create instance of WebDriver
-	DriverUtilities myDriverUtilities = new DriverUtilities();
-	WebDriver driver = myDriverUtilities.getDriver();
+	WebDriver driver;
 
 	@Test
 	public void registration() {
+		// Initialize driver
+		DriverUtilities myDriverUtilities = new DriverUtilities();
+		driver = myDriverUtilities.getDriver();
+		
 		// Go to the target website
 		driver.get(DataFileTradingPlat.homePageURL);
 
@@ -53,11 +55,14 @@ public class RegisterTest {
 		String actualUserNameMessage = RegistrationConfirmedPage.userNameMessage(driver).getText();
 		Assert.assertEquals(DataFileTradingPlat.userNameMessage, actualUserNameMessage);
 
-		// Check Login works
+		// Navigate to Login page
 		RegistrationConfirmedPage.loginLink(driver).click();
-		LoginPage.userNameField(driver).sendKeys(DataFileTradingPlat.userUserName);
-		LoginPage.passwordField(driver).sendKeys(DataFileTradingPlat.userPassword);
-		LoginPage.submitButton(driver).click();
+		
+		// Assert on correct Login page
+		Assert.assertEquals(DataFileTradingPlat.homePageURL, driver.getCurrentUrl());
+		
+		// Login with newly create information
+		LoginTest.login(driver);
 
 		// Check correct message appears to confirm to login success
 		String actualLoginMessage = HomePage.loginMessage(driver).getText();

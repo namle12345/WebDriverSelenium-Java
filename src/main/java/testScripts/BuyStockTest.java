@@ -25,12 +25,14 @@ import testData.DataFileTradingPlat;
 import utilities.DriverUtilities;
 
 public class BuyStockTest {
-	// Create instance of WebDriver
-	DriverUtilities myDriverUtilities = new DriverUtilities();
-	WebDriver driver = myDriverUtilities.getDriver();
-
+	WebDriver driver;
+	
 	@Before
 	public void startUp() {
+		// Initialize driver
+		DriverUtilities myDriverUtilities = new DriverUtilities();
+		driver = myDriverUtilities.getDriver();
+		
 		// Go to the target website
 		driver.get(DataFileTradingPlat.homePageURL);
 		
@@ -122,7 +124,7 @@ public class BuyStockTest {
 		wait.until(ExpectedConditions.elementToBeClickable(BuyingSharesPage.confirmButton(driver)));
 		BuyingSharesPage.confirmButton(driver).click();
 
-		// Assert Company text and Share number bought are correct
+		// Assert all details are correct
 		String actualCompanyText = TransactionConfirmationPage.companyText(driver).getText();
 		Assert.assertEquals(DataFileTradingPlat.companyName, actualCompanyText);
 		String actualTotalPrice = TransactionConfirmationPage.totalPriceField(driver).getText();

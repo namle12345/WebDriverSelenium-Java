@@ -15,6 +15,7 @@ import pageObjectModels.CheckBalancePage;
 import pageObjectModels.HomePage;
 import pageObjectModels.LoginPage;
 import testData.DataFileTradingPlat;
+import testScripts.LoginTest;
 import cucumber.api.java.en.Then;
 
 public class AddAccountStepDefinition {
@@ -27,15 +28,19 @@ public class AddAccountStepDefinition {
 	@Given("^a user is on the Check Balance screen of the Trading Platform$")
 	public void a_user_is_on_the_Check_Balance_screen_of_the_Trading_Platform() throws Throwable {
 		driver.get(DataFileTradingPlat.homePageURL);
-		LoginPage.userNameField(driver).sendKeys(DataFileTradingPlat.userUserName);
-		LoginPage.passwordField(driver).sendKeys(DataFileTradingPlat.userPassword);
-		LoginPage.submitButton(driver).click();
+		LoginTest.login(driver);
 		HomePage.balanceLink(driver).click();
+		Assert.assertEquals(DataFileTradingPlat.checkBalanceURL, driver.getCurrentUrl());
 	}
 
 	@When("^a user clicks on Add New Account link on the Check Balance page$")
 	public void a_user_clicks_on_Add_New_Account_link_on_the_Check_Balance_page() throws Throwable {
 		CheckBalancePage.addNewAccountLink(driver).click();
+	}
+	
+	@Then("^confirm that the user is correctly brought to Add New Account page$")
+	public void confirm_that_the_user_is_correctly_brought_to_Add_New_Account_page() throws Throwable {
+		Assert.assertEquals(DataFileTradingPlat.addAccountURL, driver.getCurrentUrl());
 	}
 
 	@When("^a user selects an appropriate currency type on the Add New Account page$")
@@ -48,6 +53,12 @@ public class AddAccountStepDefinition {
 	@When("^a user clicks on the Add Account button on the Add New Account page$")
 	public void a_user_clicks_on_the_Add_Account_button_on_the_Add_New_Account_page() throws Throwable {
 		AddNewAccountPage.submitButton(driver).click();
+	}
+	
+	@Then("^confirm that the account created is the correct currency type$")
+	public void confirm_that_the_account_created_is_the_correct_currency_type() throws Throwable {
+		String actualAccountCurrency = CheckBalancePage.USDCurrencyCell(driver).getText();
+		Assert.assertEquals(DataFileTradingPlat.currencyType, actualAccountCurrency);
 	}
 
 	@When("^a user clicks Add Funds on the newly made account row$")
@@ -72,4 +83,8 @@ public class AddAccountStepDefinition {
 		String actualAccountBalance = CheckBalancePage.USDBalanceCell(driver).getText();
 		Assert.assertEquals(DataFileTradingPlat.fundAmountLong, actualAccountBalance);
 	}
+	
+	
+
+
 }

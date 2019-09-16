@@ -23,8 +23,11 @@ Feature: Reset Password
   Scenario: Reset an existing user's password
     Given a user is on the Login screen of the Trading Platform
     When a user clicks on the Forgot Password link on the Check Balance page
-    And a user enters in the customer's valid data on the Request Password Reset page
+    Then confirm that the user is correctly brought to Reset Password page
+    When a user enters in the customer's valid data on the Request Password Reset page
     And a user clicks on the Reset Password button on the Request Password Reset page
     Then confirm that the appropriate confirmation reset password message has appeared
-    When a user can login with their new password on the Login screen
+    When a user clicks on the Home link 
+    Then confirm that the user is correctly brought to Login page 
+    When a user enters in their login information with their new password on the Login screen
     Then confirm the appropriate login confirmation message has appeared
