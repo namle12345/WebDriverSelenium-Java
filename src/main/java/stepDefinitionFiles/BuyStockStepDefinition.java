@@ -2,9 +2,12 @@ package stepDefinitionFiles;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -45,6 +48,17 @@ public class BuyStockStepDefinition {
 	@When("^a user clicks on G link on the Buy Stock page$")
 	public void a_user_clicks_on_G_link_on_the_Buy_Stock_page() throws Throwable {
 		BuyStockPage.gCompanies(driver).click();
+	}
+	
+	@Then("^confirm all companies start with the letter G$")
+	public void confirm_all_companies_start_with_the_letter_G() throws Throwable {
+		List <WebElement> rowsInTable = BuyStockPage.companiesTable(driver).findElements(By.tagName("tr"));
+		rowsInTable.remove(0);
+		for (WebElement row: rowsInTable)
+		{
+			String actualBeginningLetter = row.getText().substring(0, 1);
+			Assert.assertEquals(DataFileTradingPlat.beginningLetter, actualBeginningLetter);
+		}
 	}
 	
 	@Then("^confirm radio button is enabled and is clickable for the user$")

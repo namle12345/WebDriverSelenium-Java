@@ -20,4 +20,9 @@ public class BuyStockPage {
 	public static WebElement buyButton(WebDriver driver) {
 		return driver.findElement(By.id("submitBtn"));
 	}
+	
+	public static WebElement companiesTable(WebDriver driver) {
+		return driver.findElement(By.xpath("//div/form/table/tbody"));
+		
+	}
 }

@@ -23,7 +23,8 @@ Feature: Buy Stock
   Scenario: Test that a user can buy stock
     Given a user is on the Buy Stock screen of the Trading Platform
     When a user clicks on G link on the Buy Stock page
-    Then confirm radio button is enabled and is clickable for the user
+    Then confirm all companies start with the letter G
+    And confirm radio button is enabled and is clickable for the user
     When a user selects an appropriate radio button for GLENCORE INTL on the Buy Stock page
     Then confirm the radio button clicked has been properly selected
     When a user clicks on the Buy button on the Buy Stock page

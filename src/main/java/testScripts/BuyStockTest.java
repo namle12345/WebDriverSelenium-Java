@@ -2,13 +2,16 @@ package testScripts;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -65,8 +68,14 @@ public class BuyStockTest {
 		// Buy Stock from Companies starting with G
 		BuyStockPage.gCompanies(driver).click();
 
-		// TODO: Check all companies start with G
-		
+		// Check all companies start with G
+		List <WebElement> rowsInTable = BuyStockPage.companiesTable(driver).findElements(By.tagName("tr"));
+		rowsInTable.remove(0);
+		for (WebElement row: rowsInTable)
+		{
+			String actualBeginningLetter = row.getText().substring(0, 1);
+			Assert.assertEquals(DataFileTradingPlat.beginningLetter, actualBeginningLetter);
+		}
 		
 		// Assert buttons are enabled & clickable
 		Assert.assertTrue(BuyStockPage.radioButton(driver).isDisplayed());
