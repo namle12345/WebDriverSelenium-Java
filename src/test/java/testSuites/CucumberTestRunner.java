@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 //Tells Cucumber where to look for feature and step definition files
 @CucumberOptions(
 	features = "src\\main\\java\\featureFiles"
-	,tags={"@RegisterNewUser"}
+	,tags={"@GeneralBuyStock"} //@RegisterNewUser, @AddAccountWithFunds, 
 	,glue={"stepDefinitionFiles"}
 )
 

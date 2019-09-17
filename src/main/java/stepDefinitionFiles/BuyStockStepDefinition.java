@@ -27,7 +27,7 @@ import cucumber.api.java.en.Then;
 
 public class BuyStockStepDefinition {
 	private WebDriver driver = null;
-	WebDriverWait wait = new WebDriverWait(driver, 60);
+	WebDriverWait wait = null;
 
 	public BuyStockStepDefinition(BaseStepDefinition baseStepDefinition) {
 		this.driver = baseStepDefinition.driver;
@@ -99,6 +99,7 @@ public class BuyStockStepDefinition {
 	
 	@Then("^confirm that the calculate results shown in Transaction Summary are correct$")
 	public void confirm_that_the_calculate_results_shown_in_Transaction_Summary_are_correct() throws Throwable {
+		wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.visibilityOf(BuyingSharesPage.transactionPriceField(driver)));
 		String newTransactionFieldPrice = BuyingSharesPage.transactionPriceField(driver).getText();
 		System.out.println(newTransactionFieldPrice);

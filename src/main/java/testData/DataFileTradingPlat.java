@@ -6,8 +6,8 @@ public class DataFileTradingPlat {
 	public static String userTitle = "Dr";
 	public static String userFirstName = "Rogue";
 	public static String userLastName = "Trader";
-	public static String userEmail = "RT64@fdm.com";
-	public static String userUserName = "LontestRT64";
+	public static String userEmail = "RT67@fdm.com";
+	public static String userUserName = "LontestRT67";
 	public static String userPassword = "Scam";
 	public static String userSecurityQuestion = "What is your favourite fruit?";
 	public static String userSecurityAnswer = "Mango";

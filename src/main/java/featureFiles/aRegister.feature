@@ -23,7 +23,7 @@ Feature: Register
   Scenario: Register a new user
     Given a user is on the Registration page of the Trading Platform
     When a user enters valid customer information onto the Registration page
-    And a user enters unique "RT61@fdm.com" , "LontestRT61" and "Scam" in the relevant fields
+    And a user enters unique "RT67@fdm.com" , "LontestRT67" and "Scam" in the relevant fields
     And a user clicks on the submit button on the Registration page
     Then confirm that an appropriate welcome message has appeared
     When a user clicks on Login link

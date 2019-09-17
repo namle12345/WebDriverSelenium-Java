@@ -73,7 +73,9 @@ public class BuyStockTest {
 		rowsInTable.remove(0);
 		for (WebElement row: rowsInTable)
 		{
+			System.out.println(row.getText());
 			String actualBeginningLetter = row.getText().substring(0, 1);
+			System.out.println(actualBeginningLetter);
 			Assert.assertEquals(DataFileTradingPlat.beginningLetter, actualBeginningLetter);
 		}
 		
